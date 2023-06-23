@@ -1,0 +1,61 @@
+.filterBar {
+    padding-top: 107px;
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr 1fr 2fr;
+}
+
+.columna2 {
+    width: 500px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    background-color: cadetblue;
+    grid-column: 2;
+}
+
+.columna3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    background-color: cadetblue;
+    grid-column: 3;
+}
+
+.columna4 {
+
+    background-color: cadetblue;
+    grid-column: 4;
+}
+
+.desplegable {
+    position: relative;
+    display: inline-block;
+}
+
+.button {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+
+}
+
+.conteinerOptions {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.conteinerOptions a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.desplegable:hover .conteinerOptions{
+    display: block;
+}

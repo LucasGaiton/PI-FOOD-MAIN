@@ -1,0 +1,28 @@
+.navConteiner {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    background-color: #e99803;
+    padding: 10px;
+    border: #694401 solid 2px;
+    z-index: 500;
+    
+}
+.logoConteiner{
+    position: relative;
+    right: 70px;
+    width: 400px;
+    height: auto;
+}
+
+.logo {
+    transition: transform 0.3s ease-in-out;
+    width: 200px; /* Ajusta el tamaño del logo según tus necesidades */
+    height:75px;
+    border-radius: 25px;
+    border: rgb(172, 112, 1) ridge 2px;
+}
+
+.logo:hover{
+    transform: translateX(10px);
+}

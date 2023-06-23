@@ -18,7 +18,7 @@ router.get('/recipes/:id', async (req, res) => {
 })
 
 router.get('/recipes', async (req, res) => {
-    console.log("entra");
+
     getRecipeByName(req, res)
 })
 router.post("/recipes", async (req,res)=>{

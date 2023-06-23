@@ -1,0 +1,87 @@
+.carConteiner {
+    width: 400px;
+    height: 380px;
+    font-size: 10px;
+    box-sizing: content-box;
+    display: inline-table;
+    margin: 50px;
+    position: relative;
+
+
+}
+.carConteiner li {
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+
+.imageConteiner {
+    position: relative;
+    overflow: hidden;
+    height: 315px;
+    border-radius: 15px;
+}
+
+.image {
+    transition: transform 0.5s ease;
+    width: 400px;
+    height: 315px;
+
+
+}
+.image:hover{
+    transform: scale(1.1);
+}
+
+.dietsConteiner {
+    top: 264px;
+    left: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    height: 50px;
+    position: absolute;
+    align-items: center;
+    justify-content: start;
+
+}
+
+
+.dietsConteiner p {
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 3px;
+
+}
+
+.vegetarian {
+
+    background-color: green;
+    color: #fff;
+    font-size: 16px;
+    padding-left: 7px;
+    padding-right: 7px;
+    outline: #080808 solid 1px;
+    border-radius: 3px;
+
+}
+
+.vegan {
+    background-color: rgb(37, 206, 37);
+    color: #fff;
+    font-size: 16px;
+    padding-left: 7px;
+    padding-right: 7px;
+    outline: #080808 solid 1px;
+    border-radius: 3px;
+}
+
+.glutenFree {
+    background-color: rgb(187, 175, 7);
+    color: #fff;
+    font-size: 16px;
+    padding-left: 7px;
+    padding-right: 7px;
+    outline: #080808 solid 1px;
+    border-radius: 3px;
+}
