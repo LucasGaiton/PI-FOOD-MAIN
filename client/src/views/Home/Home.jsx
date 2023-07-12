@@ -20,6 +20,11 @@ import FilterBar from "../../components/FilterBar/FilterBar"
 export default function Home() {
     //Ejecutamos el selector y el dispatch 
     const showHomeR = useSelector((store) => store.recipesHome)
+    const recipesFilterR = useSelector((store) => store.filterRecipes)
+    const recipesSearch = useSelector((store) => store. recipesSearch)
+
+
+    //Dispatch
     const dispatch = useDispatch()
 
     //estados locales 
@@ -31,7 +36,12 @@ export default function Home() {
 
 
     //aCa hiria una condicion para cambiar el current post 
-    const currentPosts = showHomeR.slice(indexOfFirstPost, indexOfLastPost)
+
+    let currentPosts = []
+    if (recipesFilterR.length < 1)
+        currentPosts = showHomeR.slice(indexOfFirstPost, indexOfLastPost)
+    else
+        currentPosts = recipesFilterR.slice(indexOfFirstPost, indexOfLastPost)
 
     //Funciones
     const changePage = (num) => {
@@ -45,9 +55,8 @@ export default function Home() {
         if (showHomeR.length < 1) {
             dispatch(showHome())
         }
-        console.log(showHomeR);
-    }
-        , [])
+        
+    }, [])
 
 
 
@@ -55,14 +64,14 @@ export default function Home() {
         <div className={Style.home}>
             <FilterBar></FilterBar>
             <div className={Style.pagination}>
-                <Pagination changePage={changePage} totalPosts={showHomeR.length} />
+                {currentPosts.length > 2 && <Pagination changePage={changePage} totalPosts={showHomeR.length} />}
             </div>
             <div className={Style.cards}>
                 {currentPosts.map((recipe) => {
                     if (recipe.dataBase) {
-                        return <Card id={recipe.id} diets={recipe.diets[0].name} image={recipe.image} name={recipe.name} />
+                        return <Card key={recipe.id} id={recipe.id} diets={recipe.diets[0].name} image={recipe.image} name={recipe.name} />
                     }
-                    return <Card id={recipe.id} diets={recipe.diets} image={recipe.image} name={recipe.name} />
+                    return <Card key={recipe.id} id={recipe.id} diets={recipe.diets} image={recipe.image} name={recipe.name} />
                 })}
             </div>
 

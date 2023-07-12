@@ -1,5 +1,5 @@
 const axios = require("axios")
-const URL = "https://api.spoonacular.com/recipes/complexSearch?apiKey=1505d2975d724ba9b0b9179600289ab5&number=100&addRecipeInformation=true&number=100"
+const URL = "https://api.spoonacular.com/recipes/complexSearch?apiKey=5edec2c7467f4f0f8fe0efc39718903f&number=100&addRecipeInformation=true&number=100"
 const { Recipe, Diets } = require("../db")
 const { findAllEndPoint } = require("../../addEndPont")
 const { Op } = require("sequelize")
@@ -17,19 +17,19 @@ async function getRecipeByName(req, res) {
 
         if (!nombre) {
             console.log("PAsas");
-            foundRecipesBd = await Recipe.findAll({include:Diets})
+            foundRecipesBd = await Recipe.findAll({ include: Diets })
             //Agregamos una propiedad a las recipes traidas de la base de datos
             if (foundRecipesBd) {
-                foundRecipesBd.forEach((recipe) => recipe.dataValues.dataBase = true )
+                foundRecipesBd.forEach((recipe) => recipe.dataValues.dataBase = true)
                 console.log(foundRecipesBd);
             }
             const { data } = await axios.get(findAllEndPoint)
 
             foundRecipesApi = data.results
             const resul = foundRecipesApi.map((recipe) => RecipesTransformer(recipe))
-            
 
-            return res.status(200).json([...foundRecipesBd,...resul])
+
+            return res.status(200).json([...foundRecipesBd, ...resul])
         }
 
 
@@ -38,20 +38,21 @@ async function getRecipeByName(req, res) {
         foundRecipesBd = await Recipe.findAll(
             {
                 where: {
-                    nombre: {
+                    name: {
                         [Op.iLike]: `%${name}%`
                     }
                 }
             }
-        )
-        //Bucamos en la api
-        const { data } = await axios.get(findAllEndPoint)
-        foundRecipesApi = data.results.filter((recipe) => recipe.title.toLowerCase().includes(name))
-        //if(foundRecipesApi || foundRecipesBd )
+            )
+            //Bucamos en la api
+            const { data } = await axios.get(findAllEndPoint)
+            foundRecipesApi = data.results.filter((recipe) => recipe.title.toLowerCase().includes(name))
+            console.log("sigue");
 
-        const recipes = [...foundRecipesBd, ...foundRecipesApi].map((recipe) => {
+        let recipesTransformed = foundRecipesApi.map((recipe) => {
             return RecipesTransformer(recipe)
         })
+        const recipes = [...foundRecipesBd, ...recipesTransformed]
         return res.status(200).json(recipes)
 
 

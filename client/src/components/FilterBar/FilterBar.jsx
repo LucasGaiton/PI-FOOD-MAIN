@@ -1,26 +1,22 @@
 //importamos el estilo 
 import Style from "../FilterBar/FilterBar.module.css"
 //importmas useState
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 //Importamos las cosas del estado global
 import { useSelector, useDispatch } from 'react-redux'
 
 //Importamos la action
-import { allRecipes } from "../../Redux/actions"
+import { allRecipes, filterRecipes } from "../../Redux/actions"
 
 
 export default function FilterBar() {
     //estado global 
     const allRecipesR = useSelector((store) => store.AllRecipes)
-    const filterRecipes = useSelector((store) => store.filterRecipes)
+    const filterRecipesR = useSelector((store) => store.filterRecipes)
 
     //Dispatch
     const dispatch = useDispatch()
-
-
-
-
 
     //Estados locales 
     const [filter, setFilter] = useState({
@@ -29,6 +25,16 @@ export default function FilterBar() {
         healthScore: [],
         orden: []
     })
+    const [selector, setSelector] = useState(false)
+
+    //UseEffect
+    useEffect(() => {
+        if (allRecipesR.length < 1) {
+            dispatch(allRecipes())
+        }
+        console.log(filterRecipesR);
+    }, [filterRecipesR])
+
     //Hnadlers
     const handleDiets = (diet) => {
         if (!filter.diets.includes(diet))
@@ -50,10 +56,7 @@ export default function FilterBar() {
         else
             setFilter({ ...filter, origins: filter.origins.filter((origin2) => origin2 !== origin) })
     }
-    const handleSendFilter = () => {
-        if (allRecipesR.length < 1) dispatch(allRecipes())
-        console.log(allRecipesR);
-
+    const handleSendFilter = async () => {
         let recipesFiltradas = allRecipesR.filter((recipe) => {
             //Flags
             let diet = filter.diets.length > 0 ? false : true
@@ -79,7 +82,6 @@ export default function FilterBar() {
             if (filter.origins.length > 0) {
                 console.log(filter.origins.length);
                 if (filter.origins.length == 1) {
-                    console.log("Entrar aca");
                     if (filter.origins[0] == "Bd") {
                         console.log(recipe.dataBase);
                         if (recipe.dataBase) origin = true
@@ -88,19 +90,25 @@ export default function FilterBar() {
                         console.log("Esto tambien se cumple");
                         if (recipe.dataBase === undefined) origin = true
                     }
-                }else origin = true
-                
-            }
+                } else origin = true
 
-            console.log(diet && score && origin);
+            }
             return diet && score && origin
         })
-        console.log(recipesFiltradas);
+        //despachamos las recetas filtradas 
+        dispatch(filterRecipes(recipesFiltradas))
+    }
+    const handleSelector = () => {
+
     }
 
     console.log(filter);
     return (
         <div className={Style.filterBar}>
+            <div className={Style.columna1}>
+                {filter.diets.map((diet) => <div className={Style.showFilter}>{diet}</div>)}
+                {filter.origins.map((origin) => <div className={Style.showFilter}>{origin}</div>)}
+            </div>
             <div className={Style.columna2}>
                 <div className={Style.desplegable}>
                     <button className={Style.button}>Selecione una dieta</button>

@@ -5,7 +5,7 @@ export default function Pagination({ totalPosts, changePage}) {
     }
     return (
         <>
-            {pageNumbers.map((num) =><button onClick={()=>{changePage(num)}}>{num}</button>)}
+            {pageNumbers.map((num,index) =><button key={index} onClick={()=>{changePage(num)}}>{num}</button>)}
         </>
     )
 

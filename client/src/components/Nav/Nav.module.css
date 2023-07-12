@@ -1,18 +1,15 @@
 .navConteiner {
     position: fixed;
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 4fr;
+    flex-direction: row;
     background-color: #e99803;
     padding: 10px;
     border: #694401 solid 2px;
     z-index: 500;
+    align-items: center;
     
-}
-.logoConteiner{
-    position: relative;
-    right: 70px;
-    width: 400px;
-    height: auto;
 }
 
 .logo {
@@ -25,4 +22,12 @@
 
 .logo:hover{
     transform: translateX(10px);
+}
+
+.addRecipeButton{
+    padding: 20px;
+    border-radius: 22px;
+    background-color: #fff;
+    color: #e99803;
+    
 }

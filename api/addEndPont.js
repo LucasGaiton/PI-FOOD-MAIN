@@ -1,6 +1,6 @@
 module.exports={
-    apiKey : '?apiKey=e81023e846bc4551a5f4c40c90abbe3e',
+    apiKey : '?apiKey=5edec2c7467f4f0f8fe0efc39718903f',
     END_POINT_ERROR : 'https://api.spoonacular.com/recipes/complexSearch',
     dietaFlag : "&addRecipeInformation=true",
-    findAllEndPoint: "https://api.spoonacular.com/recipes/complexSearch?apiKey=e81023e846bc4551a5f4c40c90abbe3e&number=100&addRecipeInformation=true&number=100"
+    findAllEndPoint: "https://api.spoonacular.com/recipes/complexSearch?apiKey=5edec2c7467f4f0f8fe0efc39718903f&number=100&addRecipeInformation=true&number=100"
 }

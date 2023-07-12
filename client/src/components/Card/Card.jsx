@@ -49,8 +49,8 @@ export default function Card({ image, name, diets, id }) {
                         newDiets.length !== 0 && <h1>Extra diets:</h1>
                     }
                     {
-                        newDiets.map((diet) => {
-                            return <li>{diet}</li>
+                        newDiets.map((diet, index) => {
+                            return <li key={index}>{diet}</li>
                         })
                     }
                 </div>

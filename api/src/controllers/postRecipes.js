@@ -35,7 +35,6 @@ const postRecipe = async (req, res) => {
                     return Diets.create({ name: diet })
                 return foundDiet
             })
-
             await Promise.all(promises). //Utilizamos un promise All para que capture todas las asincronias 
                 then(async createdDiets => {
                     for (const diet of createdDiets) {
